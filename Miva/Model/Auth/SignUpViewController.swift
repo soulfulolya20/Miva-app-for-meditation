@@ -235,6 +235,7 @@ extension SignUpViewController {
     }
     
     func setUp() {
+        self.tabBarController?.tabBar.isHidden = true
         view.addSubview(logo)
        // view.addSubview(backButton)
         view.addSubview(signInLabel)

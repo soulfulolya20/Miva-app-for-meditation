@@ -178,6 +178,9 @@ extension SignInViewController {
                 errorLabel.isHidden = false
             } else {
                 print("wow!!!!")
+                self.tabBarController?.tabBar.isHidden = false
+                self.navigationController?.popViewController(animated: false)
+                
             }
         }
         
@@ -189,6 +192,7 @@ extension SignInViewController {
     }
     
     func setUp() {
+        self.tabBarController?.tabBar.isHidden = true
         view.addSubview(logo)
       //  view.addSubview(backButton)
         view.addSubview(signInLabel)

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		842744D228240CBB003DD190 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842744D128240CBB003DD190 /* CalendarViewController.swift */; };
+		842744D428240D2F003DD190 /* MusicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842744D328240D2F003DD190 /* MusicViewController.swift */; };
 		845F74172821DB770019A605 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845F74162821DB770019A605 /* NavigationController.swift */; };
 		84634395281FEC8900D5730F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84634394281FEC8900D5730F /* AppDelegate.swift */; };
 		84634397281FEC8900D5730F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84634396281FEC8900D5730F /* SceneDelegate.swift */; };
@@ -28,9 +30,14 @@
 		846343E32820563100D5730F /* FontsFree-Net-SFProDisplay-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 846343E12820563100D5730F /* FontsFree-Net-SFProDisplay-Thin.ttf */; };
 		846343E52820564500D5730F /* FontsFree-Net-SFProDisplay-Medium-1.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 846343E42820564400D5730F /* FontsFree-Net-SFProDisplay-Medium-1.ttf */; };
 		846343E72820565200D5730F /* FontsFree-Net-SFProDisplay-Light-1.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 846343E62820565200D5730F /* FontsFree-Net-SFProDisplay-Light-1.ttf */; };
+		8478A4D02822C4190021A5E6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8478A4CF2822C4190021A5E6 /* ProfileViewController.swift */; };
+		8478A4D22822C4490021A5E6 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8478A4D12822C4490021A5E6 /* EditProfileViewController.swift */; };
+		8478A4D42822C46A0021A5E6 /* PremiumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8478A4D32822C46A0021A5E6 /* PremiumViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		842744D128240CBB003DD190 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		842744D328240D2F003DD190 /* MusicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicViewController.swift; sourceTree = "<group>"; };
 		845F74162821DB770019A605 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		84634391281FEC8900D5730F /* Miva.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Miva.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84634394281FEC8900D5730F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -50,6 +57,9 @@
 		846343E12820563100D5730F /* FontsFree-Net-SFProDisplay-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "FontsFree-Net-SFProDisplay-Thin.ttf"; path = "../../../../../Downloads/FontsFree-Net-SFProDisplay-Thin.ttf"; sourceTree = "<group>"; };
 		846343E42820564400D5730F /* FontsFree-Net-SFProDisplay-Medium-1.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "FontsFree-Net-SFProDisplay-Medium-1.ttf"; path = "../../../../../Downloads/FontsFree-Net-SFProDisplay-Medium-1.ttf"; sourceTree = "<group>"; };
 		846343E62820565200D5730F /* FontsFree-Net-SFProDisplay-Light-1.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "FontsFree-Net-SFProDisplay-Light-1.ttf"; path = "../../../../../Downloads/FontsFree-Net-SFProDisplay-Light-1.ttf"; sourceTree = "<group>"; };
+		8478A4CF2822C4190021A5E6 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		8478A4D12822C4490021A5E6 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditProfileViewController.swift; path = Auth/EditProfileViewController.swift; sourceTree = "<group>"; };
+		8478A4D32822C46A0021A5E6 /* PremiumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,7 +82,6 @@
 			children = (
 				846343C628204C3400D5730F /* Presentors */,
 				846343C528204C1300D5730F /* Model */,
-				846343C428204BE100D5730F /* App */,
 				84634393281FEC8900D5730F /* Miva */,
 				84634392281FEC8900D5730F /* Products */,
 			);
@@ -113,7 +122,13 @@
 			children = (
 				8478A4CE2822BE6B0021A5E6 /* Auth */,
 				846343BC281FFFA200D5730F /* HomePageViewController.swift */,
+				842744D128240CBB003DD190 /* CalendarViewController.swift */,
+				842744D328240D2F003DD190 /* MusicViewController.swift */,
 				84634398281FEC8900D5730F /* ViewController.swift */,
+				8478A4CF2822C4190021A5E6 /* ProfileViewController.swift */,
+				8478A4D12822C4490021A5E6 /* EditProfileViewController.swift */,
+				8478A4D32822C46A0021A5E6 /* PremiumViewController.swift */,
+				846343C428204BE100D5730F /* App */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -235,12 +250,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				846343BB281FFF8B00D5730F /* SignUpViewController.swift in Sources */,
+				8478A4D42822C46A0021A5E6 /* PremiumViewController.swift in Sources */,
 				845F74172821DB770019A605 /* NavigationController.swift in Sources */,
 				846343BD281FFFA200D5730F /* HomePageViewController.swift in Sources */,
 				846343B7281FFF3B00D5730F /* AuthViewController.swift in Sources */,
 				84634399281FEC8900D5730F /* ViewController.swift in Sources */,
 				84634395281FEC8900D5730F /* AppDelegate.swift in Sources */,
+				8478A4D02822C4190021A5E6 /* ProfileViewController.swift in Sources */,
+				842744D428240D2F003DD190 /* MusicViewController.swift in Sources */,
+				842744D228240CBB003DD190 /* CalendarViewController.swift in Sources */,
 				846343B9281FFF5A00D5730F /* SignInViewController.swift in Sources */,
+				8478A4D22822C4490021A5E6 /* EditProfileViewController.swift in Sources */,
 				84634397281FEC8900D5730F /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
