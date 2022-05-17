@@ -24,6 +24,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         tabBar.tabBar.tintColor = UIColor(red: 0.287, green: 0.287, blue: 0.287, alpha: 1)
         tabBar.tabBar.backgroundColor = UIColor(red: 0.954, green: 0.936, blue: 0.871, alpha: 1)
         
+        let urlString = ""
+        
         let profileVC = ProfileViewController()
         let homeVC = HomePageViewController()
         let musicVC = MusicViewController()
@@ -47,9 +49,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
    //     let authVC = AuthViewController()
         tabBar.viewControllers = [navHome, navMusic, navCalendar, navProfile]
         
-        do {
-        try Auth.auth().signOut()
-        } catch {print("ne vishel") }
+        
             
         if Auth.auth().currentUser == nil {
                 let authVC = AuthViewController()

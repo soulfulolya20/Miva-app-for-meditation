@@ -11,6 +11,8 @@ import FirebaseAuth
 
 class SignUpViewController: UIViewController {
     
+    var urlString = ""
+    
     private let logo: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "logo")
@@ -18,6 +20,30 @@ class SignUpViewController: UIViewController {
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
+    
+    private lazy var avatarButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Изменить фотографию", for: .normal)
+        button.setTitleColor(UIColor(red: 0.287, green: 0.287, blue: 0.287, alpha: 1), for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 12, weight: .semibold)
+        button.addAction(UIAction() { [weak self] _ in
+            self?.addPhoto()
+        }, for: .touchUpInside)
+        button.backgroundColor = UIColor(red: 0.894, green: 0.627, blue: 0.592, alpha: 0)
+        button.layer.cornerRadius = 22
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    let imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.layer.borderWidth = 0.5
+        imageView.layer.backgroundColor = UIColor(red: 0.045, green: 0.532, blue: 0.567, alpha: 0.33).cgColor
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.layer.cornerRadius = 80
+        imageView.clipsToBounds = true
+        return imageView
+        }()
     
     private lazy var backButton: UIButton = {
         let button = UIButton()
@@ -161,7 +187,7 @@ class SignUpViewController: UIViewController {
     }
 }
 
-extension SignUpViewController {
+extension SignUpViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func addGestures() {
         let edgeGesture = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(navigateToAuth))
@@ -197,6 +223,29 @@ extension SignUpViewController {
         navigationItem.setLeftBarButton(UIBarButtonItem(customView: backButton), animated: false)
     }
     
+    func upload(currentUserId: String, photo: UIImage, completion: @escaping (Result<URL, Error>) -> Void) {
+               let ref = Storage.storage().reference().child("avatars").child(currentUserId)
+    
+               guard let imageData = imageView.image?.jpegData(compressionQuality: 0.4) else { return }
+    
+               let metadata = StorageMetadata()
+               metadata.contentType = "image/jpeg"
+    
+               ref.putData(imageData, metadata: metadata) { (metadata, error) in
+                   guard let _ = metadata else {
+                       completion(.failure(error!))
+                       return
+                   }
+                   ref.downloadURL { (url, error) in
+                       guard let url = url else {
+                           completion(.failure(error!))
+                           return
+                       }
+                       completion(.success(url))
+                   }
+               }
+    }
+    
     func navigateToHome() {
         
         let error = checkValid()
@@ -208,6 +257,26 @@ extension SignUpViewController {
                 if error != nil {
                     self.errorLabel.text = "\(error?.localizedDescription)"
                 } else {
+                    self.upload(currentUserId: (result?.user.uid) as! String, photo: self.imageView.image!) { (myresult) in
+                        switch myresult {
+                                       case .success(let url):
+                                           self.urlString = url.absoluteString
+                                           let db = Firestore.firestore()
+                                           db.collection("users").addDocument(data: [
+                                               "login": self.TextField1.text!,
+                                               "avatarURL": url.absoluteString,
+                                               "uid": result?.user.uid
+                                           ]) { (error) in
+                                               if let error = error {
+                                                   print("error1 \(error)")
+                                               }
+                                              print("error2 \(error)")
+                                           }
+                                       case .failure(let error):
+                                          print("error3 \(error)")
+                                       }
+                    }
+                    
                     let db = Firestore.firestore()
                     db.collection("users").addDocument(data: [
                         "login": self.TextField1.text!,
@@ -221,10 +290,8 @@ extension SignUpViewController {
                     
                     print("wow!!!!")
 
-                    
-//                    let vc = HomePageViewController()
-//                    vc.modalPresentationStyle = .fullScreen
-//                    self.present(vc, animated: true, completion: nil)
+                    self.tabBarController?.tabBar.isHidden = false
+                    self.navigationController?.popViewController(animated: false)
                 }
             }
         }
@@ -236,7 +303,7 @@ extension SignUpViewController {
     
     func setUp() {
         self.tabBarController?.tabBar.isHidden = true
-        view.addSubview(logo)
+       // view.addSubview(logo)
        // view.addSubview(backButton)
         view.addSubview(signInLabel)
         view.addSubview(label1)
@@ -249,22 +316,44 @@ extension SignUpViewController {
         view.addSubview(passwordTextField)
         view.addSubview(signInButton)
         view.addSubview(errorLabel)
+        view.addSubview(avatarButton)
+        view.addSubview(imageView)
         makeConstraints()
+    }
+    
+    func addPhoto() {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.sourceType = .photoLibrary
+        present(imagePickerController, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true, completion: nil)
+        guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
+        imageView.image = image
+        
     }
     
     func makeConstraints() {
         NSLayoutConstraint.activate([
-            logo.widthAnchor.constraint(equalToConstant: 76),
-            logo.heightAnchor.constraint(equalToConstant: 76),
-            logo.topAnchor.constraint(equalTo: view.topAnchor, constant: 80),
-            logo.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            imageView.widthAnchor.constraint(equalToConstant: 160),
+            imageView.heightAnchor.constraint(equalToConstant: 160),
+            imageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 80),
+            imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            avatarButton.widthAnchor.constraint(equalToConstant: 156),
+            avatarButton.heightAnchor.constraint(equalToConstant: 42),
+            avatarButton.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -5),
+            avatarButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
             
 //            backButton.widthAnchor.constraint(equalToConstant: 39),
 //            backButton.heightAnchor.constraint(equalToConstant: 40),
 //            backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 49),
 //            backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
             
-            signInLabel.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 30),
+            signInLabel.topAnchor.constraint(equalTo: avatarButton.bottomAnchor, constant: 30),
             signInLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             label1.topAnchor.constraint(equalTo: signInLabel.bottomAnchor, constant: 2),

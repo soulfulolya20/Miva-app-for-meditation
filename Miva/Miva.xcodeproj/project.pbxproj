@@ -27,7 +27,6 @@
 		846343E52820564500D5730F /* FontsFree-Net-SFProDisplay-Medium-1.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 846343E42820564400D5730F /* FontsFree-Net-SFProDisplay-Medium-1.ttf */; };
 		846343E72820565200D5730F /* FontsFree-Net-SFProDisplay-Light-1.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 846343E62820565200D5730F /* FontsFree-Net-SFProDisplay-Light-1.ttf */; };
 		8478A4D02822C4190021A5E6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8478A4CF2822C4190021A5E6 /* ProfileViewController.swift */; };
-		8478A4D22822C4490021A5E6 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8478A4D12822C4490021A5E6 /* EditProfileViewController.swift */; };
 		8478A4D42822C46A0021A5E6 /* PremiumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8478A4D32822C46A0021A5E6 /* PremiumViewController.swift */; };
 		FB56657F110D3180F94B6E71 /* Pods_Miva.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A5CFA7D92F478C17945FB9D /* Pods_Miva.framework */; };
 /* End PBXBuildFile section */
@@ -56,7 +55,6 @@
 		846343E42820564400D5730F /* FontsFree-Net-SFProDisplay-Medium-1.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "FontsFree-Net-SFProDisplay-Medium-1.ttf"; path = "../../../../../Downloads/FontsFree-Net-SFProDisplay-Medium-1.ttf"; sourceTree = "<group>"; };
 		846343E62820565200D5730F /* FontsFree-Net-SFProDisplay-Light-1.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "FontsFree-Net-SFProDisplay-Light-1.ttf"; path = "../../../../../Downloads/FontsFree-Net-SFProDisplay-Light-1.ttf"; sourceTree = "<group>"; };
 		8478A4CF2822C4190021A5E6 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		8478A4D12822C4490021A5E6 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditProfileViewController.swift; path = Auth/EditProfileViewController.swift; sourceTree = "<group>"; };
 		8478A4D32822C46A0021A5E6 /* PremiumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumViewController.swift; sourceTree = "<group>"; };
 		AEC4B673B582F96F8D6AD877 /* Pods-Miva.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Miva.debug.xcconfig"; path = "Target Support Files/Pods-Miva/Pods-Miva.debug.xcconfig"; sourceTree = "<group>"; };
 		DE902F787E7E02356BF8A194 /* Pods-Miva.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Miva.release.xcconfig"; path = "Target Support Files/Pods-Miva/Pods-Miva.release.xcconfig"; sourceTree = "<group>"; };
@@ -132,7 +130,6 @@
 				842744D328240D2F003DD190 /* MusicViewController.swift */,
 				84634398281FEC8900D5730F /* ViewController.swift */,
 				8478A4CF2822C4190021A5E6 /* ProfileViewController.swift */,
-				8478A4D12822C4490021A5E6 /* EditProfileViewController.swift */,
 				8478A4D32822C46A0021A5E6 /* PremiumViewController.swift */,
 				846343C428204BE100D5730F /* App */,
 			);
@@ -303,7 +300,6 @@
 				842744D428240D2F003DD190 /* MusicViewController.swift in Sources */,
 				842744D228240CBB003DD190 /* CalendarViewController.swift in Sources */,
 				846343B9281FFF5A00D5730F /* SignInViewController.swift in Sources */,
-				8478A4D22822C4490021A5E6 /* EditProfileViewController.swift in Sources */,
 				84634397281FEC8900D5730F /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
