@@ -1,15 +1,15 @@
 //
-//  MainTableViewCell.swift
+//  HomeCollectionViewCell.swift
 //  Miva
 //
-//  Created by Георгий Бутров on 23.05.2022.
+//  Created by Георгий Бутров on 09.06.2022.
 //
 
 import UIKit
 
-class HomeTableViewCell: UITableViewCell {
+class HomeCollectionViewCell: UICollectionViewCell {
     static var name: String {
-        return "HomeTableViewCell"
+        return "HomeCollectionCell"
     }
     
     let poster: UIImageView = {
@@ -33,36 +33,22 @@ class HomeTableViewCell: UITableViewCell {
         $0.font = .systemFont(ofSize: 14, weight: .medium)
         $0.textAlignment = .left
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundColor = UIColor(red: 0.36, green: 0.75, blue: 0.87, alpha: 1.00)
+        $0.backgroundColor = UIColor(red: 0.04, green: 0.53, blue: 0.56, alpha: 0.3)
         $0.layer.masksToBounds = true
         $0.layer.cornerRadius = 5
         return $0
     }(UILabel())
     
-    
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: .default, reuseIdentifier: reuseIdentifier)
-        
+    override init(frame: CGRect) {
+        super.init(frame: frame)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
-//        let view = UIView()
-//        view.backgroundColor = UIColor(red: 0.898, green: 0.843, blue: 0.808, alpha: 1)
-//        self.backgroundView = view
-//        backgroundView?.frame = backgroundView?.frame.inset(by: UIEdgeInsets(top: 2, left: 0, bottom: 0, right: 0)) ??  CGRect.zero
-         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 4, left: 6, bottom: 4, right: 6))
-        
-        //contentView.layer.backgroundColor = CGColor(red: 0.898, green: 0.843, blue: 0.808, alpha: 1)
-//        contentView.layer.borderColor = CGColor(red: 0.898, green: 0.843, blue: 0.808, alpha: 1)
-//        contentView.layer.borderWidth = 4
-         contentView.layer.cornerRadius = 5
-        
-        
         layout()
     }
     
@@ -72,19 +58,12 @@ class HomeTableViewCell: UITableViewCell {
         poster.image = UIImage(named: imageName)
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        title.text = nil
-        descriptionLabel.text = nil
-        poster.image = nil
-    }
-    
-    private func layout() {
-        
-        contentView.backgroundColor = UIColor(red: 0.96, green: 0.81, blue: 0.81, alpha: 1.00)
+    func layout() {
+        contentView.backgroundColor = UIColor(red: 0.95, green: 0.94, blue: 0.87, alpha: 1.00)
         contentView.addSubview(poster)
         contentView.addSubview(title)
         contentView.addSubview(descriptionLabel)
+        contentView.layer.cornerRadius = 10
         
         
         NSLayoutConstraint.activate([

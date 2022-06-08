@@ -9,30 +9,36 @@ import UIKit
 
 class MusicViewController: UIViewController {
     
-    let tableView: UITableView = {
-        let table = UITableView(frame: .zero, style: .grouped)
-        table.register(MusicTableViewCell.self, forCellReuseIdentifier: MusicTableViewCell.name)
-        table.translatesAutoresizingMaskIntoConstraints = false
-        return table
+    let collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        let col = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        col.isScrollEnabled = true
+        col.backgroundColor = UIColor(red: 0.90, green: 0.84, blue: 0.81, alpha: 1.00)
+        col.translatesAutoresizingMaskIntoConstraints = false
+        col.register(MusicCollectionViewCell.self, forCellWithReuseIdentifier: MusicCollectionViewCell.name)
+        col.showsHorizontalScrollIndicator = false
+        
+        return col
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Музыка"
-        tableView.dataSource = self
-        tableView.delegate = self
+        collectionView.dataSource = self
+        collectionView.delegate = self
         setUpUI()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        view.addSubview(tableView)
+        view.addSubview(collectionView)
         
-        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        tableView.backgroundColor = UIColor(red: 0.898, green: 0.843, blue: 0.808, alpha: 1)
+        collectionView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        collectionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        collectionView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        collectionView.backgroundColor = UIColor(red: 0.898, green: 0.843, blue: 0.808, alpha: 1)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,26 +47,21 @@ class MusicViewController: UIViewController {
     
     func setUpUI() {
         self.navigationItem.hidesBackButton = true
-        tableView.separatorColor = UIColor(red: 0.898, green: 0.843, blue: 0.808, alpha: 1)
-        self.tableView.separatorStyle = .none
-        tableView.isScrollEnabled = true
         view.backgroundColor = UIColor(red: 0.898, green: 0.843, blue: 0.808, alpha: 1)
-        
-        
-        
     }
     
 
 
 }
-extension MusicViewController: UITableViewDataSource, UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+extension MusicViewController: UICollectionViewDataSource & UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         8
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: MusicTableViewCell.name, for: indexPath) as? MusicTableViewCell else { return UITableViewCell() }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MusicCollectionViewCell.name , for: indexPath) as! MusicCollectionViewCell
         switch indexPath.row {
         case 0 :
             cell.configurate(name: "Настроение космоса", description: "6 композиций", imageName: "10")
@@ -92,16 +93,7 @@ extension MusicViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        40
-    }
- 
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        60
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         var name: String = ""
         var imageName = ""
         switch indexPath.row {
@@ -135,7 +127,15 @@ extension MusicViewController: UITableViewDataSource, UITableViewDelegate {
         let detailsVC = MusicDetailsViewController(title: name, imageName: imageName)
         navigationItem.backBarButtonItem?.image = UIImage(named: "back")
         navigationItem.title = ""
-        tableView.deselectRow(at: indexPath, animated: true)
         self.navigationController?.pushViewController(detailsVC, animated: true)
+    }
+    
+    
+    
+}
+
+extension MusicViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width - 10, height: collectionView.frame.height / 10)
     }
 }

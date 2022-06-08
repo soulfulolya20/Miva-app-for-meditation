@@ -1,15 +1,15 @@
 //
-//  MusicTableViewCell.swift
+//  MusicCollectionViewCell.swift
 //  Miva
 //
-//  Created by Георгий Бутров on 23.05.2022.
+//  Created by Георгий Бутров on 09.06.2022.
 //
 
 import UIKit
 
-class MusicTableViewCell: UITableViewCell {
+class MusicCollectionViewCell: UICollectionViewCell {
     static var name: String {
-        return "MusicTableViewCell"
+        return "MusicCollectionCell"
     }
     
     let poster: UIImageView = {
@@ -33,20 +33,20 @@ class MusicTableViewCell: UITableViewCell {
         $0.font = .systemFont(ofSize: 14, weight: .medium)
         $0.textAlignment = .left
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundColor = UIColor(red: 0.36, green: 0.75, blue: 0.87, alpha: 1.00)
+        $0.backgroundColor = UIColor(red: 0.04, green: 0.53, blue: 0.56, alpha: 0.3)
         $0.layer.masksToBounds = true
         $0.layer.cornerRadius = 5
         return $0
     }(UILabel())
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: .default, reuseIdentifier: reuseIdentifier)
-        
+    override init(frame: CGRect) {
+        super.init(frame: frame)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         layout()
@@ -58,21 +58,14 @@ class MusicTableViewCell: UITableViewCell {
         poster.image = UIImage(named: imageName)
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        titleLabel.text = nil
-        descriptionLabel.text = nil
-        poster.image = nil
-    }
-    
-    private func layout() {
+    func layout() {
         contentView.addSubview(poster)
         contentView.addSubview(titleLabel)
         contentView.addSubview(descriptionLabel)
         contentView.backgroundColor = UIColor(red: 0.898, green: 0.843, blue: 0.808, alpha: 1)
         NSLayoutConstraint.activate([
-            poster.widthAnchor.constraint(equalToConstant: 45),
-            poster.heightAnchor.constraint(equalToConstant: 45),
+            poster.widthAnchor.constraint(equalToConstant: contentView.frame.width / 5),
+            poster.heightAnchor.constraint(equalToConstant: contentView.frame.height),
             poster.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10),
             poster.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             
@@ -87,3 +80,4 @@ class MusicTableViewCell: UITableViewCell {
         ])
     }
 }
+

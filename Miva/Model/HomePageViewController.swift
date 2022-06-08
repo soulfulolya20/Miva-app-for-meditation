@@ -28,11 +28,17 @@ class HomePageViewController: UIViewController {
         return label
     }()
     
-    let tableView: UITableView = {
-        let table = UITableView()
-        table.register(HomeTableViewCell.self, forCellReuseIdentifier: HomeTableViewCell.name)
-        table.translatesAutoresizingMaskIntoConstraints = false
-        return table
+    let collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        let col = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        col.isScrollEnabled = true
+        col.backgroundColor = UIColor(red: 0.90, green: 0.84, blue: 0.81, alpha: 1.00)
+        col.translatesAutoresizingMaskIntoConstraints = false
+        col.register(HomeCollectionViewCell.self, forCellWithReuseIdentifier: HomeCollectionViewCell.name)
+        col.showsHorizontalScrollIndicator = false
+        
+        return col
     }()
     
     override func viewDidLoad() {
@@ -40,54 +46,44 @@ class HomePageViewController: UIViewController {
         self.navigationItem.title = "С возвращением, \(helloLabel.text ?? "user")"
         print("Home")
         view.backgroundColor = UIColor(red: 0.898, green: 0.843, blue: 0.808, alpha: 1)
-        tableView.dataSource = self
-        tableView.delegate = self
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        
         setUp()
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        tableView.backgroundColor = UIColor(red: 0.898, green: 0.843, blue: 0.808, alpha: 1)
+       
     }
     
     
-        func setUp() {
+    func setUp() {
         self.navigationItem.hidesBackButton = true
+            
+        view.addSubview(collectionView)
         
-        //view.addSubview(helloLabel)
-        view.addSubview(tableView)
-        tableView.separatorColor = UIColor(red: 0.898, green: 0.843, blue: 0.808, alpha: 1)
-        self.tableView.separatorStyle = .none
-        tableView.isScrollEnabled = true
-        
-//        NSLayoutConstraint.activate([
-//            helloLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            helloLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 40),
-//
-//
-//        ])
-        
+        collectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: 30).isActive = true
+        collectionView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        collectionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//            return cellSpacingHeight
-//        }
 
 }
 
-extension HomePageViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension HomePageViewController:  UICollectionViewDataSource & UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         6
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: HomeTableViewCell.name, for: indexPath) as? HomeTableViewCell else { return UITableViewCell() }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCollectionViewCell.name , for: indexPath) as! HomeCollectionViewCell
+        
         switch indexPath.row {
         case 0 :
             cell.configurate(name: "7 дней контроля над стрессом", description: " Уходим от напряжения ", imageName: "16")
@@ -113,16 +109,8 @@ extension HomePageViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        40
-    }
- 
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        100
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         var name: String = ""
         switch indexPath.row {
         case 0 :
@@ -143,9 +131,14 @@ extension HomePageViewController: UITableViewDataSource, UITableViewDelegate {
         let detailsVC = HomeDetailsViewController(name: name)
         navigationItem.backBarButtonItem?.image = UIImage(named: "back")
         navigationItem.title = ""
-        tableView.deselectRow(at: indexPath, animated: true)
         self.navigationController?.pushViewController(detailsVC, animated: true)
     }
     
     
+}
+
+extension HomePageViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width - 10, height: collectionView.frame.height / 7)
+    }
 }
