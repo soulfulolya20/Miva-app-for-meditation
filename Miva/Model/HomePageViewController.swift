@@ -12,6 +12,7 @@ class HomePageViewController: UIViewController {
     
     var helloLabel: UILabel = {
         let label = UILabel()
+        
         let db = Firestore.firestore()
         let docRef = db.collection("users").document("nyfb0bDTw0Zld4Npxm7a")
         docRef.getDocument { (document, error) in
@@ -43,7 +44,6 @@ class HomePageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "С возвращением, \(helloLabel.text ?? "user")"
         print("Home")
         view.backgroundColor = UIColor(red: 0.898, green: 0.843, blue: 0.808, alpha: 1)
         collectionView.dataSource = self

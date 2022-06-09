@@ -76,10 +76,10 @@ extension MusicViewController: UICollectionViewDataSource & UICollectionViewDele
             cell.configurate(name: "Бездонность", description: "13 композиций", imageName: "17")
             return cell
         case 4 :
-            cell.configurate(name: "Прошулки по лесу", description: "4 композиций", imageName: "12")
+            cell.configurate(name: "Прогулки по лесу", description: "4 композиций", imageName: "12")
             return cell
         case 5 :
-            cell.configurate(name: "Lo-Fi звечания", description: "3 композиций", imageName: "13")
+            cell.configurate(name: "Lo-Fi звучания", description: "3 композиций", imageName: "13")
             return cell
         case 6 :
             cell.configurate(name: "ACMP", description: "5 композиций", imageName: "4")
@@ -110,10 +110,10 @@ extension MusicViewController: UICollectionViewDataSource & UICollectionViewDele
             name = "Бездонность"
             imageName = "17"
         case 4 :
-            name = "Прошулки по лесу"
+            name = "Прогулки по лесу"
             imageName =  "12"
         case 5 :
-            name = "Lo-Fi звечания"
+            name = "Lo-Fi звучания"
             imageName = "13"
         case 6 :
             name = "ACMP"

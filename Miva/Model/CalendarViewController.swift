@@ -53,7 +53,7 @@ class CalendarViewController: UIViewController, FSCalendarDelegate {
         case "09-06":
             dateLabel.text = "🙂"
         case "10-06":
-            dateLabel.text = "🙂"
+            dateLabel.text = ""
         default:
             dateLabel.text = ""
         }
